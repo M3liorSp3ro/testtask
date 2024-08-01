@@ -1,4 +1,4 @@
-'use strict';
+
 
 const fs = require('fs');
 const path = require('path');
@@ -11,6 +11,9 @@ const resolve = require('resolve');
  *
  * @param {Object} options
  */
+
+const removeWildcardPart = p => p.replace('/*', '');
+
 function getAdditionalModulePaths(options = {}) {
   const baseUrl = options.baseUrl;
 
@@ -55,41 +58,25 @@ function getAdditionalModulePaths(options = {}) {
  * @param {*} options
  */
 function getWebpackAliases(options = {}) {
-  const baseUrl = options.baseUrl;
+  const baseUrl = options.baseUrl
 
   if (!baseUrl) {
-    return {};
+      return {}
   }
 
-  const baseUrlResolved = path.resolve(paths.appPath, baseUrl);
-
-  if (path.relative(paths.appPath, baseUrlResolved) === '') {
-    return {
-      src: paths.appSrc,
-    };
-  }
+  let resultAlias = {src: paths.appSrc}
+  
+  return Object.assign({}, resultAlias,
+          Object.keys(options.paths).reduce(
+              (obj, alias) => {
+                  obj[removeWildcardPart(alias)] = 
+                    options.paths[alias].map(removeWildcardPart)[0]
+                  return obj
+              }, {}
+          )
+      )
 }
 
-/**
- * Get jest aliases based on the baseUrl of a compilerOptions object.
- *
- * @param {*} options
- */
-function getJestAliases(options = {}) {
-  const baseUrl = options.baseUrl;
-
-  if (!baseUrl) {
-    return {};
-  }
-
-  const baseUrlResolved = path.resolve(paths.appPath, baseUrl);
-
-  if (path.relative(paths.appPath, baseUrlResolved) === '') {
-    return {
-      '^src/(.*)$': '<rootDir>/src/$1',
-    };
-  }
-}
 
 function getModules() {
   // Check if TypeScript is setup
@@ -126,7 +113,6 @@ function getModules() {
   return {
     additionalModulePaths: additionalModulePaths,
     webpackAliases: getWebpackAliases(options),
-    jestAliases: getJestAliases(options),
     hasTsConfig,
   };
 }

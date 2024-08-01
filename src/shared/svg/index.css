@@ -1,0 +1,16 @@
+/*component Arrow */
+.animatedArrow {
+    animation: animArrow .5s linear;
+  }
+
+@keyframes animArrow {
+    0% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(100px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }

@@ -1,0 +1,13 @@
+.stick {
+    width: 2px;
+    height: 46px;
+    background: #DCDCEB;
+    border-radius: '2px';
+}
+
+.searchItem {
+    display: flex;
+    justify-content: space-around;
+    gap: 170px;
+    align-items: center;
+}

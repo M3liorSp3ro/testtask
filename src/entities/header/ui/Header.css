@@ -1,0 +1,18 @@
+.headerLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 21px;
+}
+
+.headerBlock {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 41px;
+}
+
+.headerButton {
+    width: 164px;
+}

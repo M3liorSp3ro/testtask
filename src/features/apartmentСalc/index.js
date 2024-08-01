@@ -1,1 +1,1 @@
-export * from './ui/ApartmentCalc.js'
+export * from './ui/ApartmentCalc.jsx'

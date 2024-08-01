@@ -1,0 +1,18 @@
+.searchContainer {
+    padding: 20px 29px;
+}
+
+.searchBlock {
+    width: 100%;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 0px 25px 0px rgba(20, 65, 181, 0.14);
+}
+
+.searchBlocks {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    
+}
